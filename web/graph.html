@@ -23,6 +23,10 @@
 				text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
 				cursor: default;
 			}
+
+			.axis line{
+				stroke-width: 0px!important;
+			}
 			
 			.legend {
 				font-family: 'Raleway', sans-serif;
@@ -43,119 +47,7 @@
 		<input type="file" id="files" name="files[]" multiple />
 		<output id="list"></output>
 
-		<script>
-		  function handleFileSelect(evt) {
-		    var files = evt.target.files; // FileList object
-
-		    // Loop through the FileList and render image files as thumbnails.
-		    for (var i = 0, f; f = files[i]; i++) {
-
-		      var reader = new FileReader();
-
-		      // Closure to capture the file information.
-		      reader.onload = (function(theFile) {
-		        return function(e) {
-		          // Render thumbnail.
-		          var span = document.createElement('span');
-		          span.innerHTML = "<p>" + e.target.result + "</p>";
-		          document.getElementById('list').insertBefore(span, null);
-		        };
-		      })(f);
-
-		      // Read in the image file as a data URL.
-		      reader.readAsText(f);
-		    }
-		  }
-
-		  document.getElementById('files').addEventListener('change', handleFileSelect, false);
-		</script>
-
 		<script src="radarChart.js"></script>
-		<scirpt src="readFile.js"></scirpt>	
-		<script>
-			////////////////////////////////////////////////////////////// 
-			//////////////////////// Set-Up ////////////////////////////// 
-			////////////////////////////////////////////////////////////// 
-
-			var margin = {top: 100, right: 100, bottom: 100, left: 100},
-				width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
-				height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
-					
-			////////////////////////////////////////////////////////////// 
-			////////////////////////// Data ////////////////////////////// 
-			////////////////////////////////////////////////////////////// 
-
-			var data = [
-					  [//Day One
-						{axis:"One",value:0.0},
-						{axis:"Two",value:93.0},
-						{axis:"Three",value:108.0},
-						{axis:"Four",value:180.0},
-						{axis:"Five",value:78.0},
-						{axis:"Six",value:147.0},
-						{axis:"Seven",value:78.0},
-						{axis:"Eight",value:135.0},			
-						{axis:"Nine",value:138.0},			
-						{axis:"Ten",value:75.0},			
-						{axis:"Eleven",value:105.0},			
-						{axis:"Twelve",value:222.0},			
-						{axis:"Thirteen",value:87.0},			
-						{axis:"Fourteen",value:84.0},			
-						{axis:"Fiveteen",value:222.0},			
-						{axis:"Sixteen",value:120.0},			
-						{axis:"Seventeen",value:105.0},			
-						{axis:"Eighteen",value:222.0},			
-						{axis:"Nineteen",value:87.0},			
-						{axis:"Twenty",value:84.0},		
-						{axis:"Twenty-One",value:222.0},		
-						{axis:"Twenty-Two",value:105.0},		
-						{axis:"Twenty-Three",value:72.0},		
-						{axis:"Twenty-Four",value:84.0},		
-					  ],[//Day Two
-						{axis:"One",value:168.0},
-						{axis:"Two",value:90.0},
-						{axis:"Three",value:189.0},
-						{axis:"Four",value:165.0},
-						{axis:"Five",value:90.0},
-						{axis:"Six",value:72.0},
-						{axis:"Seven",value:135.0},
-						{axis:"Eight",value:126.0},			
-						{axis:"Nine",value:78.0},			
-						{axis:"Ten",value:81.0},			
-						{axis:"Eleven",value:111.0},			
-						{axis:"Twelve",value:105.0},			
-						{axis:"Thirteen",value:87.0},			
-						{axis:"Fourteen",value:129.0},			
-						{axis:"Fiveteen",value:81.0},			
-						{axis:"Sixteen",value:111.0},			
-						{axis:"Seventeen",value:105.0},			
-						{axis:"Eighteen",value:87.0},			
-						{axis:"Nineteen",value:129.0},			
-						{axis:"Twenty",value:81.0},		
-						{axis:"Twenty-One",value:108.0},		
-						{axis:"Twenty-Two",value:96.0},		
-						{axis:"Twenty-Three",value:123.0},		
-						{axis:"Twenty-Four",value:120.0},		
-					  ],
-					];
-			////////////////////////////////////////////////////////////// 
-			//////////////////// Draw the Chart ////////////////////////// 
-			////////////////////////////////////////////////////////////// 
-
-			var color = d3.scale.ordinal()
-				.range(["#7cb5ec","#7cb5ec","#7cb5ec"]);
-				
-			var radarChartOptions = {
-			  w: width,
-			  h: height,
-			  margin: margin,
-			  maxValue: 180,
-			  levels: 6,
-			  roundStrokes: true,
-			  color: color
-			};
-			//Call function to draw the Radar chart
-			RadarChart(".radarChart", data, radarChartOptions);
-		</script>
+		<script src="readFile.js"></script>
 	</body>
 </html>
