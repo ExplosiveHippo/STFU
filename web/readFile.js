@@ -6,7 +6,8 @@ height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 					
 var dayArray = [];
 var sets;
-var dayEnteries = 3600;
+var setLow = 0;
+var setHigh = 3600;
 var fullData = [
 	 //  [
 		// {value:0.0},
@@ -76,21 +77,29 @@ function handleFileSelect(evt) {
 
 function populateData(data){
 	dataArray = data.split(",");
-	sets = dataArray.length / dayEnteries;
-	sets = Math.ceil(sets);
-	console.log(sets);
-
-	for(var i = 0; i < sets; i++){
-		for(var j = 0; i < dayEnteries; i++){
+	sets = dataArray.length / setHigh;
+	for(var i = 0; i <= sets; i++){
+		for(var j = setLow; j <= 3600; j++){
 			dayArray.push({
-				value: parseInt(dataArray[i])
+				value: parseInt(dataArray[j])
 			});
 		}
+		
+		console.log("setLow: " + setLow);
+		console.log("setHigh: " + setHigh);
+		
+		setLow = setHigh;
+		if(setHigh * 2 > dataArray.length){
+			setHigh = dataArray.length;
+		}else{
+			setHigh = setHigh * 2;
+		}
+		//console.log("setHigh: " + setHigh);
+
 		fullData.push(dayArray);
 	}
 
 	console.log(fullData);
-
 
 	RadarChart(".radarChart", fullData, radarChartOptions);
 
